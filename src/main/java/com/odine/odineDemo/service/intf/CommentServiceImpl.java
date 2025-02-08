@@ -1,29 +1,22 @@
 package com.odine.odineDemo.service.intf;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
+ 
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.odine.odineDemo.dto.FreelancerDto;
+import com.odine.odineDemo.dto.CommentDto;
+  
 import com.odine.odineDemo.enums.CommentMapper;
-import com.odine.odineDemo.enums.FreelancerMapper;
-import com.odine.odineDemo.enums.JobMapper;
-import com.odine.odineDemo.model.Freelancer;
-import com.odine.odineDemo.model.Language;
-import com.odine.odineDemo.model.Specialties;
-import com.odine.odineDemo.model.Tool;
-import com.odine.odineDemo.repository.FreelancerRepository;
-import com.odine.odineDemo.repository.JobRepository;
-import com.odine.odineDemo.repository.LanguagesRepository;
-import com.odine.odineDemo.repository.SpecialtiesRepository;
-import com.odine.odineDemo.repository.ToolsRepository;
+ 
+import com.odine.odineDemo.model.Comment;
+import com.odine.odineDemo.repository.CommentRepository;
 import com.odine.odineDemo.request.RequestCreateComment;
-import com.odine.odineDemo.request.RequestCreateFreelancer;
-import com.odine.odineDemo.request.RequestCreateJob;
-import com.odine.odineDemo.request.RequestSearchFreelancer;
+ 
+import com.odine.odineDemo.request.RequestUpdateComment;
 import com.odine.odineDemo.response.ResponseBaseApi;
 
 import lombok.RequiredArgsConstructor;
@@ -32,12 +25,35 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CommentServiceImpl implements CommentService {
 	@Autowired
-	JobRepository jobRepository;
-	 
-	
-	private final CommentMapper jobMapper = CommentMapper.INSTANCE;
+	CommentRepository commentRepository;
+
+	private final CommentMapper commentMapper = CommentMapper.INSTANCE;
+
 	@Override
-	public ResponseBaseApi createComment(RequestCreateComment request) {  
-          return null;
+	public ResponseBaseApi createComment(RequestCreateComment request) {
+		ResponseBaseApi response = new ResponseBaseApi();
+		if (commentRepository.save(commentMapper.toCommentEntity(request)) != null) {
+			response.setSuccess(true);
+			return response;
+		}
+		response.setSuccess(false);
+		return response;
+	}
+
+	@Override
+	public List<CommentDto> readCommentsOfJob(Long jobId) {
+		List<Comment> comments = commentRepository.findByJobId(jobId);
+		return comments.stream().map(commentMapper::toCommentDto).collect(Collectors.toCollection(ArrayList::new));
+	}
+
+	@Override
+	public ResponseBaseApi updateComment(RequestUpdateComment request) {
+		ResponseBaseApi response = new ResponseBaseApi();
+		if (commentRepository.save(commentMapper.toCommentEntity(request)) != null) {
+			response.setSuccess(true);
+			return response;
+		}
+		response.setSuccess(false);
+		return response;
 	}
 }

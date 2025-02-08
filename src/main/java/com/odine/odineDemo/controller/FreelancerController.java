@@ -46,8 +46,15 @@ public class FreelancerController {
 	public ResponseEntity<List<FreelancerDto>> getAllFreelancers() {
 		return new ResponseEntity<>(freelancerService.getAllFreelancers(), HttpStatus.OK);
 	}
+	
+	@Operation(summary = "Get a specific freelancer")
+	@GetMapping("/getSpecificFreelancer")
+	public ResponseEntity<FreelancerDto > getSpecificFreelancer() {
+		return new ResponseEntity<>(freelancerService.getSpecificFreeLancer(), HttpStatus.OK);
+	}
 
-	@Operation(summary = "Search Specific Freelancers")
+	@Operation(summary = "Search for a freelancer by name, city, freelancer type, design tools known\r\n"
+			+ "and specialty.")
 	@PostMapping("/searchFreelancer")
 	public ResponseEntity<FreelancerDto> searchFreelancer(
 			@RequestBody(required = true) RequestSearchFreelancer request) {

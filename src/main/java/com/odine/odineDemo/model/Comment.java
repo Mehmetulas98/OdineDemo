@@ -27,7 +27,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	@Column(name = "JOB_ID")
-	private Long freelancerId;
+	private Long jobId;
 	@Column(name = "COMMENTER_NAME")
 	private String commenterName;
 	@Column(name = "CREATED_DATE")

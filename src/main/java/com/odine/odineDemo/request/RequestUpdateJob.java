@@ -1,8 +1,6 @@
 package com.odine.odineDemo.request;
 
- 
-
-import java.util.Date;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,9 +11,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RequestCreateComment  {
-	private Long jobId;
-	private String commenterName;
-	private Date createdDate;
-	private String comment;
+public class RequestUpdateJob {
+	private Long id;
+	private String status;
+	private String description;
 }

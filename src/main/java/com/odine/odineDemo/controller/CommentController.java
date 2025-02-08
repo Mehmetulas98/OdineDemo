@@ -12,23 +12,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.odine.odineDemo.dto.CommentDto;
 import com.odine.odineDemo.dto.FreelancerDto;
-import com.odine.odineDemo.model.Freelancer;
-import com.odine.odineDemo.repository.FreelancerRepository;
-import com.odine.odineDemo.request.RequestCreateFreelancer;
-import com.odine.odineDemo.request.RequestCreateJob;
-import com.odine.odineDemo.request.RequestSearchFreelancer;
+import com.odine.odineDemo.request.RequestCreateComment;
+import com.odine.odineDemo.request.RequestUpdateComment;
 import com.odine.odineDemo.response.ResponseBaseApi;
-import com.odine.odineDemo.service.intf.FreelancerService;
-import com.odine.odineDemo.service.intf.JobService;
-
+import com.odine.odineDemo.service.intf.CommentService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
-@Tag(name = "Freelancer Controller")
+@Tag(name = "Comment Controller")
 @RestController
-@RequestMapping("/job")
+@RequestMapping("/comment")
 @Validated
 @AllArgsConstructor
 public class CommentController {
@@ -38,9 +34,20 @@ public class CommentController {
 
 	@Operation(summary = "Create New Comment")
 	@PostMapping("/createComment")
-	public ResponseBaseApi createComment(@RequestBody(required = true) RequestCreateComment request) {
-		commentService.createComment(request);
-		return null;
+	public ResponseEntity<ResponseBaseApi> createComment(@RequestBody(required = true) RequestCreateComment request) {
+		return new ResponseEntity<>(commentService.createComment(request), HttpStatus.OK);
+	}
+	
+	@Operation(summary = "Read Comments Of Job")
+	@GetMapping("/readCommentsOfJob")
+	public ResponseEntity<List<CommentDto>> getAllFreelancers(Long jobId) {
+		return new ResponseEntity<>(commentService.readCommentsOfJob(jobId), HttpStatus.OK);
+	}
+	
+	@Operation(summary = "Update Comment")
+	@PostMapping("/updateComment")
+	public ResponseEntity<ResponseBaseApi> updateComment(@RequestBody(required = true) RequestUpdateComment request) {
+		return new ResponseEntity<>(commentService.updateComment(request), HttpStatus.OK);
 	}
 
 	 

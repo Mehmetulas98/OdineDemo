@@ -13,6 +13,8 @@ ResponseBaseApi createFreelancer(RequestCreateFreelancer request);
 	
 	List<FreelancerDto> getAllFreelancers();
 	
+	 FreelancerDto getSpecificFreeLancer();
+	
 	 FreelancerDto searchFreelancer(RequestSearchFreelancer request);
 
 }

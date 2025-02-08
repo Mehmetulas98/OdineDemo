@@ -1,5 +1,7 @@
 package com.odine.odineDemo.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,8 +28,10 @@ public class Job {
 	private Long id;
 	@Column(name = "FREELANCER_ID")
 	private Long freelancerId;
-	@Column(name = "JOB_STATUS")
-	private String jobStatus;
+	@Column(name = "CREATED_DATE")
+	private Date createdDate;
+	@Column(name = "STATUS")
+	private String status;
 	@Column(name = "DESCRIPTION")
 	private String description;
  

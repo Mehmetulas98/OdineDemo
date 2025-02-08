@@ -36,8 +36,6 @@ public class Freelancer {
 	private String type;
 	@Column(name = "PORTFOLIO_PAGE_URL")
 	private String portfolioPageUrl;
-	// tool alanını eklemeye gerek yok 
-	// burada 3 tane alan olacak secodnay olup
 	@Column(name = "EVALUATION_SCORE")
 	private Long evaluationScore;
  
