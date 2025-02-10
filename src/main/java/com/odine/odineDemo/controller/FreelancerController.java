@@ -16,6 +16,7 @@ import com.odine.odineDemo.dto.FreelancerDto;
 import com.odine.odineDemo.model.Freelancer;
 import com.odine.odineDemo.repository.FreelancerRepository;
 import com.odine.odineDemo.request.RequestCreateFreelancer;
+import com.odine.odineDemo.request.RequestGetSpecificFreelancer;
 import com.odine.odineDemo.request.RequestSearchFreelancer;
 import com.odine.odineDemo.response.ResponseBaseApi;
 import com.odine.odineDemo.service.intf.FreelancerService;
@@ -48,15 +49,15 @@ public class FreelancerController {
 	}
 	
 	@Operation(summary = "Get a specific freelancer")
-	@GetMapping("/getSpecificFreelancer")
-	public ResponseEntity<FreelancerDto > getSpecificFreelancer() {
-		return new ResponseEntity<>(freelancerService.getSpecificFreeLancer(), HttpStatus.OK);
+	@PostMapping("/getSpecificFreelancer")
+	public ResponseEntity<FreelancerDto > getSpecificFreelancer( @RequestBody(required = true) RequestGetSpecificFreelancer request) {
+		return new ResponseEntity<>(freelancerService.getSpecificFreeLancer(request), HttpStatus.OK);
 	}
 
 	@Operation(summary = "Search for a freelancer by name, city, freelancer type, design tools known\r\n"
 			+ "and specialty.")
 	@PostMapping("/searchFreelancer")
-	public ResponseEntity<FreelancerDto> searchFreelancer(
+	public ResponseEntity<List<FreelancerDto>> searchFreelancer(
 			@RequestBody(required = true) RequestSearchFreelancer request) {
 		return new ResponseEntity<>(freelancerService.searchFreelancer(request), HttpStatus.OK);
 	}

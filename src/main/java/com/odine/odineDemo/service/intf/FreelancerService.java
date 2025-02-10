@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.odine.odineDemo.dto.FreelancerDto;
 import com.odine.odineDemo.request.RequestCreateFreelancer;
+import com.odine.odineDemo.request.RequestGetSpecificFreelancer;
 import com.odine.odineDemo.request.RequestSearchFreelancer;
 import com.odine.odineDemo.response.ResponseBaseApi;
 
@@ -13,8 +14,8 @@ ResponseBaseApi createFreelancer(RequestCreateFreelancer request);
 	
 	List<FreelancerDto> getAllFreelancers();
 	
-	 FreelancerDto getSpecificFreeLancer();
+	 FreelancerDto getSpecificFreeLancer(RequestGetSpecificFreelancer request);
 	
-	 FreelancerDto searchFreelancer(RequestSearchFreelancer request);
+	 List<FreelancerDto> searchFreelancer(RequestSearchFreelancer request);
 
 }

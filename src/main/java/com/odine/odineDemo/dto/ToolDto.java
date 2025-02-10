@@ -1,6 +1,6 @@
 package com.odine.odineDemo.dto;
 
-import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,10 +10,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommentDto {
+public class ToolDto {
 	private Long id;
-	private Long jobId;
-	private String commenterName;
-	private Date createdDate;
-	private String comment;
+ 	private Long freelancerId;
+	private String name;
 }
